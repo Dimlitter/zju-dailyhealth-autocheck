@@ -296,17 +296,11 @@ if __name__ == '__main__':
     f_name = "account.json"
     # 填写要自动打卡的：账号 密码, 然后自己实现循环即可帮多人打卡
     # aps = [("<username>", "<password>")]
-    account = accountname
-    pwd = key
-    if account == "" or pwd == "":
-        if not os.path.exists(f_name):
-            with open(f_name, "w") as f:
-                account, pwd = input("请输入账号, 密码：").split()
-                json.dump({"account": account, "password": pwd}, f)
-        else:
-            with open(f_name, "r") as f:
-                d = json.load(f)
-                account, pwd = d.get("account"), d.get("password")
+    
+    
+    with open(f_name, "r") as f:
+        d = json.load(f)
+        account, pwd = d.get("account"), d.get("password")
 
     s = HealthCheckInHelper(account, pwd, delay_run=True)
     s.run() 
