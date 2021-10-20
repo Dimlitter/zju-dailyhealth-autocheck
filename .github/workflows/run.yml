@@ -1,0 +1,31 @@
+name: autocheck
+
+on:
+  push:
+  pull_request:
+  watch:
+    types: [ started ]
+  schedule:
+    - cron: 23 */7 * * *
+
+jobs:
+  migu-sign:
+    runs-on: ubuntu-latest
+
+    steps:
+    - uses: actions/checkout@v2
+    - name: 'Set python'
+      uses: actions/setup-python@v1
+      with:
+          python-version: '3.6'
+    - name: 'Install dependencies'
+      run: python -m pip install --upgrade requests
+
+    - name: sign
+      env:
+       account: ${{ secrets.account }}
+       pwd: ${{ secrets.pwd }}
+       TG_TOKEN: ${{ secrets.TG_TOKEN }}
+       CHAT_ID: ${{ secrets.CHAT_ID }}
+      run: |
+       python3 check.py
