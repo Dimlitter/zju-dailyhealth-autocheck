@@ -309,4 +309,4 @@ if __name__ == '__main__':
                 account, pwd = d.get("account"), d.get("password")
 
     s = HealthCheckInHelper(account, pwd, delay_run=True)
-    s.run()
+    s.run() 
