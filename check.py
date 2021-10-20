@@ -270,7 +270,7 @@ class HealthCheckInHelper(ZJULogin):
         if self.delay_run:
             # 确保定时脚本执行时间不太一致
             sleep= os.getenv("sleep")
-            time.sleep(random.randint(0, "sleep"))
+            time.sleep(random.randint(0, str(sleep)))
         # 拿到Cookies和headers
         self.login()
         # 拿取eai-sess的cookies信息
