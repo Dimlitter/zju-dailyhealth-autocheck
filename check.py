@@ -299,8 +299,8 @@ if __name__ == '__main__':
     f_name = "account.json"
     # 填写要自动打卡的：账号 密码, 然后自己实现循环即可帮多人打卡
     # aps = [("<username>", "<password>")]
-    account = os.getenv("accountname")
-    pwd = os.getenv("key")
+    account = os.getenv("account")
+    pwd = os.getenv("pwd")
     if account == "" or pwd == "":
         if not os.path.exists(f_name):
             with open(f_name, "w") as f:
