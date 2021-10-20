@@ -3,6 +3,7 @@
 > 大家有条件的尽量把代码下载到自己仓库运行，最近github action风控较严，觉得有用的话给个star就好啦
 ## fork自Mrli学长，我只是加了github action 执行功能 还有python写的tg bot推送
 Mrli学长原库链接：https://github.com/Freedomisgood/When_Coding_in_ZJU/tree/main/Health_Checkin
+<br>交流群组：https://t.me/zjuers </br>
  # 成功打卡 耶
  ## 需要的secrets
  > <br>account:浙江大学通行证账号</br>
