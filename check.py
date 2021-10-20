@@ -270,13 +270,12 @@ class HealthCheckInHelper(ZJULogin):
         if self.delay_run:
             # 确保定时脚本执行时间不太一致
             sleep= os.getenv("sleep")
-            time.sleep(random.randint(0, sleep))
+            time.sleep(random.randint(0, "sleep"))
         # 拿到Cookies和headers
         self.login()
         # 拿取eai-sess的cookies信息
         self.sess.get(self.REDIRECT_URL)
-        # 由于IP定位放到服务器上运行后会是服务器的IP定位， 因此这边直接写死软院定位
-        # 如果是其他校区可以在本地运行下get_ip_location()后拿到location数据写死
+        # 由于IP定位放到服务器上运行后会是服务器的IP定位
         # location = get_ip_location()
         # print(location)
         lng= os.getenv("lng")
