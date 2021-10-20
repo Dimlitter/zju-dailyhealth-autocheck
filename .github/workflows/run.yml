@@ -29,6 +29,5 @@ jobs:
        CHAT_ID: ${{ secrets.CHAT_ID }}
        lng: ${{ secrets.lng }}
        lat: ${{ secrets.lat }}
-       sleep: ${{ secrets.sleep }}
       run: |
        python3 check.py
