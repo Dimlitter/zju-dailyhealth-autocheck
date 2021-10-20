@@ -1,6 +1,7 @@
 # Dimlitter-zju-dailyhealth-autocheck
 利用github action 实现zju自动健康打卡
 ## fork自Mrli学长，我只是加了github action 执行功能 还有python写的tg bot推送
+Mrli学长源库链接：https://github.com/Freedomisgood/When_Coding_in_ZJU/tree/main/Health_Checkin
  # 成功打卡 耶
  ## 需要的secrets
  > <br>account:浙江大学通行证账号</br>
