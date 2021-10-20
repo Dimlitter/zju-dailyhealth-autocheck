@@ -298,7 +298,7 @@ if __name__ == '__main__':
     # aps = [("<username>", "<password>")]
    account = ""
    pwd = ""
-    if account == "" or pwd == "":
+   if account == "" or pwd == "":
         if not os.path.exists(f_name):
             with open(f_name, "w") as f:
                 account, pwd = input("请输入账号, 密码：").split()
