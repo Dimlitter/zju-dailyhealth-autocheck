@@ -6,8 +6,8 @@ import time
 import os
 import random
 from requests import post
-TG_TOKEN = os.getenv(TG_TOKEN)	#TG机器人的TOKEN
-CHAT_ID = os.getenv(CHAT_ID)	#推送消息的CHAT_ID
+TG_TOKEN = os.getenv("TG_TOKEN")	#TG机器人的TOKEN
+CHAT_ID = os.getenv("CHAT_ID")	#推送消息的CHAT_ID
 
 
 class LoginError(Exception):
@@ -299,8 +299,8 @@ if __name__ == '__main__':
     f_name = "account.json"
     # 填写要自动打卡的：账号 密码, 然后自己实现循环即可帮多人打卡
     # aps = [("<username>", "<password>")]
-    account = os.getenv(accountname)
-    pwd = os.getenv(key)
+    account = os.getenv("accountname")
+    pwd = os.getenv("key")
     if account == "" or pwd == "":
         if not os.path.exists(f_name):
             with open(f_name, "w") as f:
