@@ -269,8 +269,7 @@ class HealthCheckInHelper(ZJULogin):
         print("正在为{}健康打卡".format(self.username))
         if self.delay_run:
             # 确保定时脚本执行时间不太一致
-            sleep= os.getenv("sleep")
-            time.sleep(random.randint(0, str(sleep)))
+            time.sleep(random.randint(0, 10))
         # 拿到Cookies和headers
         self.login()
         # 拿取eai-sess的cookies信息
