@@ -23,8 +23,8 @@ jobs:
 
     - name: sign
       env:
-       account: ${{ secrets.account }}
-       pwd: ${{ secrets.pwd }}
+       account: ${{ secrets.accountname }}
+       pwd: ${{ secrets.key }}
        TG_TOKEN: ${{ secrets.TG_TOKEN }}
        CHAT_ID: ${{ secrets.CHAT_ID }}
       run: |
