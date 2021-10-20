@@ -9,7 +9,7 @@ on:
     - cron: 23 */7 * * *
 
 jobs:
-  migu-sign:
+  healthcheck:
     runs-on: ubuntu-latest
 
     steps:
