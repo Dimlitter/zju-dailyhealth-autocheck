@@ -269,7 +269,8 @@ class HealthCheckInHelper(ZJULogin):
         print("正在为{}健康打卡".format(self.username))
         if self.delay_run:
             # 确保定时脚本执行时间不太一致
-            time.sleep(random.randint(0, 1))
+            sleep= os.getenv("sleep")
+            time.sleep(random.randint(0, sleep))
         # 拿到Cookies和headers
         self.login()
         # 拿取eai-sess的cookies信息
@@ -278,7 +279,9 @@ class HealthCheckInHelper(ZJULogin):
         # 如果是其他校区可以在本地运行下get_ip_location()后拿到location数据写死
         # location = get_ip_location()
         # print(location)
-        location = {'info': 'LOCATE_SUCCESS', 'status': 1, 'lng': '120.08614003658295', 'lat': '30.309457989456554'}
+        lng= os.getenv("lng")
+        lat= os.getenv("lat")
+        location = {'info': 'LOCATE_SUCCESS', 'status': 1, 'lng': lng, 'lat': lat}
         geo_info = self.get_geo_info(location)
         # print(geo_info)
         res = self.take_in(geo_info)
