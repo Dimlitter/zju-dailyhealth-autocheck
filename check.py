@@ -284,7 +284,7 @@ class HealthCheckInHelper(ZJULogin):
         # print(geo_info)
         res = self.take_in(geo_info)
         print(res)
-        if CHAT_ID or TG_TOKEN  != *** :
+        if CHAT_ID is None or TG_TOKEN is None :
             print("telegram推送未配置，请自行查看签到结果")
         else :
             telegram_message = '浙江大学每日健康打卡 V1.0 '+ " \n\n 签到结果: " + res.get("m") #需要推送的信息
@@ -308,7 +308,7 @@ if __name__ == '__main__':
     if account == "" or pwd == "":
         if not os.path.exists(f_name):
             with open(f_name, "w") as f:
-                account, pwd = input("请输入账号, 密码：").split()
+                account, pwd = input("未配置账号密码，请添加secrets").split()
                 json.dump({"account": account, "password": pwd}, f)
         else:
             with open(f_name, "r") as f:
