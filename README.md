@@ -14,7 +14,8 @@ Mrli学长原库链接：https://github.com/Freedomisgood/When_Coding_in_ZJU/tre
  ><br>TG_TOKEN:tg bot 的token 通过私聊bot father获得</br>
  ><br>CHAT_ID：你账号的ID</br>
 
-## 2021.10.24 tg推送模块分离 妄图增加钉钉推送 正在淦 
-## 2021.10.23 添加secrets检查提醒 增加tg bot推送判断 
-## 2021.10.20 可用 将持续跟进
+## 更新日志
+### 2021.10.24 tg推送模块分离 妄图增加钉钉推送 正在淦 
+### 2021.10.23 添加secrets检查提醒 增加tg bot推送判断 
+### 2021.10.20 可用 将持续跟进
 
