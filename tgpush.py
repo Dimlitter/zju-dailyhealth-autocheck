@@ -29,3 +29,4 @@ def post_tg(message):
         
 if __name__ == "__main__":
     post_tg('浙江大学每日健康打卡 V1.0 '+ " \n\n 签到结果: " + res.get("m"))    
+ 
