@@ -5,6 +5,7 @@ import datetime
 import time
 import os
 import random
+from tgpush import post_tg
 
 class LoginError(Exception):
     """Login Exception"""
