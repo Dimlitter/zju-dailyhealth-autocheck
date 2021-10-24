@@ -4,8 +4,9 @@ from requests import post
 TG 消息推送模块
 """
 
-TG_TOKEN = '1336324972:AAHlbuz5UtG-3pzJNHp17BxvBAzNDQyDk0M'	#TG机器人的TOKEN
-CHAT_ID = '1055165212'	#推送消息的CHAT_ID
+TG_TOKEN = os.getenv("TG_TOKEN")	#TG机器人的TOKEN
+CHAT_ID = os.getenv("CHAT_ID")	    #推送消息的CHAT_ID
+
 
 
 def post_tg(message):
