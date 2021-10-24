@@ -20,3 +20,6 @@ Mrli学长原库链接：https://github.com/Freedomisgood/When_Coding_in_ZJU/tre
 ### 2021.10.23 添加secrets检查提醒 增加tg bot推送判断 
 ### 2021.10.20 可用 将持续跟进
 
+## TO DO
+### 增加socks5代理功能，以解决github action服务器访问国内网站不稳定的问题
+### 实现多样化推送渠道
