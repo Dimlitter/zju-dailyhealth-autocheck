@@ -5,10 +5,6 @@ import datetime
 import time
 import os
 import random
-from requests import post
-TG_TOKEN = os.getenv("TG_TOKEN")	#TG机器人的TOKEN
-CHAT_ID = os.getenv("CHAT_ID")	#推送消息的CHAT_ID
-
 
 class LoginError(Exception):
     """Login Exception"""
@@ -287,15 +283,8 @@ class HealthCheckInHelper(ZJULogin):
         if CHAT_ID is None or TG_TOKEN is None :
             print("telegram推送未配置，请自行查看签到结果")
         else :
-            telegram_message = '浙江大学每日健康打卡 V1.0 '+ " \n\n 签到结果: " + res.get("m") #需要推送的信息
-            params = (
-    ('chat_id', CHAT_ID),
-    ('text', telegram_message),
-    ('parse_mode', "Markdown"), #可选Html或Markdown
-    ('disable_web_page_preview', "yes")
-)   
-            telegram_url = "https://api.telegram.org/bot" + TG_TOKEN + "/sendMessage"
-            telegram_req = post(telegram_url, params=params)
+            #调用tg推送模块
+            post_tg('浙江大学每日健康打卡 V1.2 '+ " \n\n 签到结果: " + res.get("m")) 
 
 
 
