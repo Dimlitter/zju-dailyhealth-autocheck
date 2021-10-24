@@ -1,4 +1,5 @@
 from requests import post
+import os
  
 """
 TG 消息推送模块
