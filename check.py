@@ -270,24 +270,29 @@ class HealthCheckInHelper(ZJULogin):
             # 确保定时脚本执行时间不太一致
             time.sleep(random.randint(0, 10))
         # 拿到Cookies和headers
-        self.login()
-        # 拿取eai-sess的cookies信息
-        self.sess.get(self.REDIRECT_URL)
-        # 由于IP定位放到服务器上运行后会是服务器的IP定位
-        # location = get_ip_location()
-        # print(location)
-        lng= os.getenv("lng")
-        lat= os.getenv("lat")
-        location = {'info': 'LOCATE_SUCCESS', 'status': 1, 'lng': lng, 'lat': lat}
-        geo_info = self.get_geo_info(location)
-        # print(geo_info)
-        res = self.take_in(geo_info)
-        print(res)
-        if CHAT_ID is None or TG_TOKEN is None :
-            print("telegram推送未配置，请自行查看签到结果")
-        else :
+        try:
+            self.login()
+            # 拿取eai-sess的cookies信息
+            self.sess.get(self.REDIRECT_URL)
+            # 由于IP定位放到服务器上运行后会是服务器的IP定位
+            # location = get_ip_location()
+            # print(location)
+            lng= os.getenv("lng")
+            lat= os.getenv("lat")
+            location = {'info': 'LOCATE_SUCCESS', 'status': 1, 'lng': lng, 'lat': lat}
+            geo_info = self.get_geo_info(location)
+            # print(geo_info)
+            res = self.take_in(geo_info)
+            print(res)
+            if CHAT_ID is None or TG_TOKEN is None :
+                print("telegram推送未配置，请自行查看签到结果")
+            else :
+                #调用tg推送模块
+                post_tg('浙江大学每日健康打卡 V1.2 '+ " \n\n 签到结果: " + res.get("m")) 
+        except requests.exceptions.ConnectionError as err:
+            # reraise as KubeException, but log stacktrace.
             #调用tg推送模块
-            post_tg('浙江大学每日健康打卡 V1.2 '+ " \n\n 签到结果: " + res.get("m")) 
+            post_tg('统一认证平台登录失败,请检查github服务器网络状态')
 
 
 
