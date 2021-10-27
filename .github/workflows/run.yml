@@ -33,5 +33,9 @@ jobs:
        CHAT_ID: ${{ secrets.CHAT_ID }}
        lng: ${{ secrets.lng }}
        lat: ${{ secrets.lat }}
+       ipadress: ${{ secrets.ipadress }}
+       port: ${{ secrets.port }}
+       username: ${{ secrets.username }}
+       password: ${{ secrets.password }}
       run: |
        python3 check.py
