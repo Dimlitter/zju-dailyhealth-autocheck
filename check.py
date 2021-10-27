@@ -19,7 +19,7 @@ password = os.getenv("password")
 
 if ipadress is None or port is None :
     print("默认不使用socks5代理")
-else ：
+else：
     socks.set_default_proxy(socks.SOCKS5, "ipadress", port,True,"username","password")
     socket.socket = socks.socksocket
 #签到程序模块
