@@ -17,9 +17,10 @@ jobs:
     - name: 'Set python'
       uses: actions/setup-python@v1
       with:
-          python-version: '3.6'
+          python-version: '3.8'
     - name: 'Install dependencies'
-      run: python -m pip install --upgrade requests,pip
+      run: python -m pip install --upgrade requests
+           python -m pip install --upgrade pip
            apt install python3-pip
            pip3 install Pysocks
 
