@@ -13,13 +13,18 @@ Mrli学长原库链接：https://github.com/Freedomisgood/When_Coding_in_ZJU/tre
  ### 可选 tg bot推送
  ><br>TG_TOKEN:tg bot 的token 通过私聊bot father获得</br>
  ><br>CHAT_ID：你账号的ID</br>
+ ><br>ipadress：国内服务器ip</br>
+ ><br>port：socks5服务端口</br>
+ ><br>username：socks5服务的帐号</br>
+ ><br>password：socks5服务的密码</br>
 
 ## 更新日志 
+### 2021.10.27 添加socks5代理功能，使用国内ip，增加打卡隐蔽性
 ### 2021.10.24 tg推送模块分离 妄图增加钉钉推送 正在淦 
 #### 感谢 zxc2012 增加的平台登录检查功能
 ### 2021.10.23 添加secrets检查提醒 增加tg bot推送判断 
 ### 2021.10.20 可用 将持续跟进
 
 ## TO DO
-### 增加socks5代理功能，以解决github action服务器访问国内网站不稳定的问题
+### 增加socks5代理功能，以解决github action服务器访问国内网站不稳定的问题（已实现）
 ### 实现多样化推送渠道
