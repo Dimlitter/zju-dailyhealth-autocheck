@@ -20,8 +20,9 @@ jobs:
           python-version: '3.8'
     - name: 'Install dependencies'
       run: python -m pip install --upgrade requests
-           apt-get install pip3
-           pip3 install Pysocks
+           |python -m pip install --upgrade pip
+           |apt-get install pip3
+           |pip3 install Pysocks
 
     - name: sign
       env:
