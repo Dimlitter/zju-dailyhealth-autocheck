@@ -12,7 +12,7 @@ TG_TOKEN = os.getenv("TG_TOKEN")	#TG机器人的TOKEN
 CHAT_ID = os.getenv("CHAT_ID")	    #推送消息的CHAT_ID
 
 #此处添加socks5代理（请自建，有需求请进群取）
-ip adress = os.getenv("ip adress")
+ipadress = os.getenv("ipadress")
 port = os.getenv("port")
 username = os.getenv("username")
 password = os.getenv("password")
@@ -20,7 +20,7 @@ password = os.getenv("password")
 if ip adress is None or port is None :
     print("默认不使用socks5代理")
 else ：
-    socks.set_default_proxy(socks.SOCKS5, "ip adress", port,True,"username","password")
+    socks.set_default_proxy(socks.SOCKS5, "ipadress", port,True,"username","password")
     socket.socket = socks.socksocket
 #签到程序模块
 class LoginError(Exception):
