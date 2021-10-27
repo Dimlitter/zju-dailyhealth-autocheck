@@ -304,7 +304,7 @@ class HealthCheckInHelper(ZJULogin):
             elif ipadress is None or port is None:
                 #调用tg推送模块
                 post_tg('浙江大学每日健康打卡 V1.2 '+ " \n\n 签到结果: " + res.get("m")) 
-            else
+            else:
                 print("使用国内ip，tg推送请自行反代tg api")
         except requests.exceptions.ConnectionError as err:
             # reraise as KubeException, but log stacktrace.
