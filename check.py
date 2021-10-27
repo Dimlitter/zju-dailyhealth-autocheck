@@ -10,7 +10,7 @@ import socket
 from tgpush import post_tg
 TG_TOKEN = os.getenv("TG_TOKEN")	#TG机器人的TOKEN
 CHAT_ID = os.getenv("CHAT_ID")	    #推送消息的CHAT_ID
-
+ 
 #此处添加socks5代理（请自建，有需求请进群取）
 ipadress = os.getenv("ipadress")
 port = os.getenv("port")
