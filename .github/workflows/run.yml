@@ -23,6 +23,7 @@ jobs:
            |python -m pip install --upgrade pip
            |apt-get install pip3
            |pip3 install Pysocks
+           |pip3 install requests
 
     - name: sign
       env:
