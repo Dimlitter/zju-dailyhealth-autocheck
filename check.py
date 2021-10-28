@@ -5,8 +5,6 @@ import datetime
 import time
 import os
 import random
-import socks
-import socket
 from tgpush import post_tg
 TG_TOKEN = os.getenv("TG_TOKEN")	#TG机器人的TOKEN
 CHAT_ID = os.getenv("CHAT_ID")	    #推送消息的CHAT_ID
@@ -20,6 +18,8 @@ password = os.getenv("password")
 if ipadress is None or port is None :
     print("默认不使用socks5代理")
 else:
+    import socks
+    import socket
     socks.set_default_proxy(socks.SOCKS5, ipadress, port,True,username,password)
     socket.socket = socks.socksocket
 #签到程序模块
