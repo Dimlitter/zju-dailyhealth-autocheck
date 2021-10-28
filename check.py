@@ -5,8 +5,6 @@ import datetime
 import time
 import os
 import random
-import socks
-import socket
 from tgpush import post_tg
 TG_TOKEN = os.getenv("TG_TOKEN")	#TG机器人的TOKEN
 CHAT_ID = os.getenv("CHAT_ID")	    #推送消息的CHAT_ID
