@@ -17,12 +17,11 @@ port = os.getenv("port")
 username = os.getenv("username")
 password = os.getenv("password")
 
-if ipadress is None or port is None :
-    print("默认不使用socks5代理")
-    ipadress = "127.0.0.1"
+if ipadress is None or port is None:
+     print("默认不使用socks5代理")
 else:
-    socks.set_default_proxy(socks.SOCKS5, ipadress, port,True,username,password)
-    socket.socket = socks.socksocket
+     socks.set_default_proxy(socks.SOCKS5, ipadress, port,True,username,password)
+     socket.socket = socks.socksocket
 #签到程序模块
 class LoginError(Exception):
     """Login Exception"""
