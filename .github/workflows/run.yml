@@ -22,7 +22,6 @@ jobs:
       run: python -m pip install --upgrade requests
            |python -m pip install --upgrade pip
            |apt-get install pip3
-           |pip3 install Pysocks
            |pip3 install requests
     - name: sign
       env:
@@ -32,9 +31,5 @@ jobs:
        CHAT_ID: ${{ secrets.CHAT_ID }}
        lng: ${{ secrets.lng }}
        lat: ${{ secrets.lat }}
-       ipadress: ${{ secrets.ipadress }}
-       port: ${{ secrets.port }}
-       username: ${{ secrets.username }}
-       password: ${{ secrets.password }}
       run: |
        python3 check.py
