@@ -11,19 +11,6 @@ from tgpush import post_tg
 TG_TOKEN = os.getenv("TG_TOKEN")	#TG机器人的TOKEN
 CHAT_ID = os.getenv("CHAT_ID")	    #推送消息的CHAT_ID
  
-#此处添加socks5代理（请自建，有需求请进群取）
-ipadress = os.getenv("ipadress")
-port = os.getenv("port")
-username = os.getenv("username")
-password = os.getenv("password")
-
-if ipadress is None or port is None:
-     print("默认不使用socks5代理")
-     socks.set_default_proxy(socks.SOCKS5, "localhost", 1080,True,admin,123456)
-     socket.socket = socks.socksocket
-else:
-     socks.set_default_proxy(socks.SOCKS5, ipadress, port,True,username,password)
-     socket.socket = socks.socksocket
 #签到程序模块
 class LoginError(Exception):
     """Login Exception"""
@@ -302,11 +289,9 @@ class HealthCheckInHelper(ZJULogin):
             print(res)
             if CHAT_ID is None or TG_TOKEN is None :
                 print("telegram推送未配置，请自行查看签到结果")
-            elif ipadress is None or port is None:
+            else:   
                 #调用tg推送模块
                 post_tg('浙江大学每日健康打卡 V1.2 '+ " \n\n 签到结果: " + res.get("m")) 
-            else:
-                print("使用国内ip，tg推送请自行反代tg api")
         except requests.exceptions.ConnectionError as err:
             # reraise as KubeException, but log stacktrace.
             #调用tg推送模块
