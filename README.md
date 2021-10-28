@@ -4,7 +4,7 @@
 ## fork自Mrli学长，我只是加了github action 执行功能 还有python写的tg bot推送
 Mrli学长原库链接：https://github.com/Freedomisgood/When_Coding_in_ZJU/tree/main/Health_Checkin
 <br>交流群组：https://t.me/zjuers </br>
- # 成功打卡 耶
+ # 【目前有点小问题，可将pysocks代理部分删除，或添加socks5代理】
  ## 需要的secrets(必填)
  > <br>account:浙江大学通行证账号</br>
  > <br>pwd:通行证密码</br>
