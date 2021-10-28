@@ -4,7 +4,7 @@
 ## fork自Mrli学长，我只是加了github action 执行功能 还有python写的tg bot推送
 Mrli学长原库链接：https://github.com/Freedomisgood/When_Coding_in_ZJU/tree/main/Health_Checkin
 <br>交流群组：https://t.me/zjuers </br>
- # 【socks5代理问题暂时无法解决，需要添加socks5代理到国内的请换dev分支】
+ # 【socks5代理问题暂时无法解决，需要添加socks5代理，实现国内ip访问的请换dev分支】
  ## 需要的secrets(必填)
  > <br>account:浙江大学通行证账号</br>
  > <br>pwd:通行证密码</br>
