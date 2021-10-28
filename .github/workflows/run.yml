@@ -24,9 +24,9 @@ jobs:
            |apt-get install pip3
            |pip3 install Pysocks
            |pip3 install requests
-           |wget https://raw.githubusercontent.com/qinghuas/socks5-install/master/socks5.sh;bash socks5.sh
-           |socks5 install
-           |socks5 user add admin 123456
+           |sudo wget https://raw.githubusercontent.com/qinghuas/socks5-install/master/socks5.sh;bash socks5.sh
+           |sudo socks5 install
+           |sudo socks5 user add admin 123456
     - name: sign
       env:
        account: ${{ secrets.account }}
