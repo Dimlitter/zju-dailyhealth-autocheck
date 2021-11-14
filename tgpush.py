@@ -28,5 +28,5 @@ def post_tg(message):
         print("Telegram Error")
         
 if __name__ == "__main__":
-    post_tg('浙江大学每日健康打卡 V1.0 '+ " \n\n 签到结果: " + res.get("m"))    
+    post_tg('浙江大学每日健康打卡 V1.0 '+ " \n\n 签到结果: " + "请自行查看"    
  
