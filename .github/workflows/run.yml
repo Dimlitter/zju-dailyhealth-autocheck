@@ -31,5 +31,7 @@ jobs:
        CHAT_ID: ${{ secrets.CHAT_ID }}
        lng: ${{ secrets.lng }}
        lat: ${{ secrets.lat }}
+       DD_BOT_TOKEN: ${{ secrets.DD_BOT_TOKEN }}
+       DD_BOT_SECRET: ${{ secrets.DD_BOT_SECRET }}
       run: |
        python3 check.py
