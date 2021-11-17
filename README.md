@@ -1,5 +1,5 @@
 # Dimlitter-zju-dailyhealth-autocheck
-利用github action 实现zju自动健康打卡
+利用github action 实现自动健康打卡
 > 大家有条件的尽量把代码下载到自己仓库运行，最近github action风控较严，觉得有用的话给个star就好啦
 ## fork自Mrli学长，我只是加了github action 执行功能 还有python写的推送
 Mrli学长原库链接：https://github.com/Freedomisgood/When_Coding_in_ZJU/tree/main/Health_Checkin
