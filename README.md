@@ -35,3 +35,4 @@ Mrli学长原库链接：https://github.com/Freedomisgood/When_Coding_in_ZJU/tre
 ## TO DO
  - [x] 增加socks5代理功能，以解决github action服务器访问国内网站不稳定的问题（已实现，查看dev分支）
  - [ ] 实现多样化推送渠道
+ - [ ] 模拟真实打卡UA/随机UA
