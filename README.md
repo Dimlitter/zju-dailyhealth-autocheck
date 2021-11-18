@@ -4,7 +4,17 @@
 ## fork自Mrli学长，我只是加了github action 执行功能 还有python写的推送
 Mrli学长原库链接：https://github.com/Freedomisgood/When_Coding_in_ZJU/tree/main/Health_Checkin
 <br>交流群组：https://t.me/zjuers </br>
- # 【socks5代理问题暂时无法解决，需要添加socks5代理，实现国内ip访问的请换dev分支】
+## 声明
+
+本项目为Python学习交流的开源非营利项目，仅作为程序员之间相互学习交流之用。
+
+严禁用于商业用途，禁止使用本项目进行任何盈利活动。
+
+使用者请遵从相关政策。对一切非法使用所产生的后果，我们概不负责。
+
+本项目对您如有困扰请联系我们删除。
+
+## 【socks5代理问题暂时无法解决，需要添加socks5代理，实现国内ip访问的请换dev分支】
  ## 需要的secrets(必填)
  > <br>account:浙江大学通行证账号</br>
  > <br>pwd:通行证密码</br>
@@ -23,5 +33,5 @@ Mrli学长原库链接：https://github.com/Freedomisgood/When_Coding_in_ZJU/tre
 ### 2021.10.23 添加secrets检查提醒 增加tg bot推送判断 
 
 ## TO DO
-### 增加socks5代理功能，以解决github action服务器访问国内网站不稳定的问题（已实现，查看dev分支）
-### 实现多样化推送渠道
+ - [x] 增加socks5代理功能，以解决github action服务器访问国内网站不稳定的问题（已实现，查看dev分支）
+ - [ ] 实现多样化推送渠道
