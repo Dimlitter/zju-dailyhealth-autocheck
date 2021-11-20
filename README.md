@@ -1,6 +1,16 @@
 # Dimlitter-zju-dailyhealth-autocheck
+<div style="text-align: center">
+
+ ![AUR](https://img.shields.io/badge/license-MIT%20License%202.0-green.svg)
+![GitHub stars](https://img.shields.io/github/stars/Dimlitter/zju-dailyhealth-autocheck.svg?style=social&label=Stars)
+![GitHub forks](https://img.shields.io/github/forks/Dimlitter/zju-dailyhealth-autocheck.svg?style=social&label=Fork)
+
+</div>
+
 利用github action 实现自动健康打卡
+
 > 大家有条件的尽量把代码下载到自己仓库运行，最近github action风控较严，觉得有用的话给个star就好啦
+
 ## fork自Mrli学长，我只是加了github action 执行功能 还有python写的推送
 Mrli学长原库链接：https://github.com/Freedomisgood/When_Coding_in_ZJU/tree/main/Health_Checkin
 <br>交流群组：https://t.me/zjuers </br>
@@ -15,14 +25,22 @@ Mrli学长原库链接：https://github.com/Freedomisgood/When_Coding_in_ZJU/tre
 本项目对您如有困扰请联系我们删除。
 
 ## 【socks5代理问题暂时无法解决，需要添加socks5代理，实现国内ip访问的请换dev分支】
- ## 需要的secrets(必填)
- > <br>account:浙江大学通行证账号</br>
- > <br>pwd:通行证密码</br>
- > <br>lng:所打卡位置的经度</br>
- > <br>lat:所打卡位置的纬度</br>
- ### 可选 tg bot推送
- ><br>TG_TOKEN:tg bot 的token 通过私聊bot father获得</br>
- ><br>CHAT_ID：你账号的ID</br>
+
+## 需要的secrets(必填)
+ 
+ > account:浙江大学通行证账号
+ > 
+ > pwd:通行证密码
+ > 
+ > lng:所打卡位置的经度
+ > 
+ > lat:所打卡位置的纬度
+
+### 可选 tg bot推送
+ 
+ >TG_TOKEN:tg bot 的token 通过私聊bot father获得
+ >
+ >CHAT_ID：你账号的ID
 
 ## 更新日志 
 ### 2021.10.28 pysocks问题无法解决，创建dev分支
