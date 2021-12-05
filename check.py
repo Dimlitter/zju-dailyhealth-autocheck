@@ -231,7 +231,11 @@ class HealthCheckInHelper(ZJULogin):
             'bztcyy': '',
             'sftjhb': '0',
             'sftjwh': '0',
-            'sfjcqz': '',
+            'ismoved': '0',
+            # 👇-----12.1日修改-----👇
+            'sfjcqz': '0',
+            'jcqzrq': '',
+            # 👆-----12.1日修改-----👆
             'jrsfqzys': '',
             'jrsfqzfy': '',
             'sfyqjzgc': '',
@@ -243,17 +247,17 @@ class HealthCheckInHelper(ZJULogin):
             'szgj': '',
             'fxyy': '',
             'jcjg': '',
+            # uid每个用户不一致
+            # 'uid': new_uid,
+            # id每个用户不一致
+            # 'id': new_id,
+            # 下列原来参数都是12.1新版没有的
             # 日期
             'date': get_date(),
-            # uid每个用户不一致
-            #'uid': new_uid,
             'created': round(time.time()),
             'szsqsfybl': '0',
             'sfygtjzzfj': '0',
             'gtjzzfjsj': '',
-            # id每个用户不一致
-            #'id': new_id,
-            'ismoved': '0',
             'zgfx14rfhsj': '',
             'jcqzrq': '',
             'gwszdd': '',
