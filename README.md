@@ -43,6 +43,7 @@ Mrli学长原库链接：https://github.com/Freedomisgood/When_Coding_in_ZJU/tre
  >CHAT_ID：你账号的ID
 
 ## 更新日志 
+### 2021.12.05 更新打卡参数
 ### 2021.11.27 打卡界面发生变化 无需更新仍可使用
 # 紫荆港校区封校 如您出现体温升高等异常现象，请主动填报！
 ### 2021.10.28 pysocks问题无法解决，创建dev分支
