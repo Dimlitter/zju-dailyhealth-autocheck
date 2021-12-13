@@ -28,7 +28,7 @@ Mrli学长原库链接：https://github.com/Freedomisgood/When_Coding_in_ZJU/tre
 
 ## 需要的secrets(必填)
  
- > account:浙江大学通行证账号
+ > account:通行证账号
  > 
  > pwd:通行证密码
  > 
