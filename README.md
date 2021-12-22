@@ -36,9 +36,9 @@ Mrli学长原库链接：https://github.com/Freedomisgood/When_Coding_in_ZJU/tre
 
 ### 可选 tg bot推送
  
- >TG_TOKEN:tg bot 的token 通过私聊bot father获得
+ >TG_TOKEN: tg bot的token 通过私聊 @botfather 获得
  >
- >CHAT_ID：你账号的ID
+ >CHAT_ID：你账号的ID 可以通过私聊 @userinfobot 获取
 
 ## 更新日志 
 ### 2021.12.22 更新统一认证平台登录
