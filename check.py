@@ -293,7 +293,7 @@ class HealthCheckInHelper(ZJULogin):
                 print("telegram推送未配置，请自行查看签到结果")
             else:   
                 #调用tg推送模块
-                post_tg('浙江大学每日健康打卡 V1.2 '+ " \n\n 签到结果: " + res.get("m")) 
+                post_tg('浙江大学每日健康打卡 V1.3 '+ " \n\n 签到结果: " + res.get("m")) 
         except requests.exceptions.ConnectionError as err:
             # reraise as KubeException, but log stacktrace.
             #调用tg推送模块
