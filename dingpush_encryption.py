@@ -6,6 +6,10 @@ import json
 import hashlib
 import base64
 
+"""
+钉钉 消息推送模块
+"""
+
 DD_BOT_TOKEN = os.getenv("DD_BOT_TOKEN")
 DD_BOT_SECRET=os.getenv("DD_BOT_SECRET") #哈希算法验证(可选)
   
