@@ -6,7 +6,7 @@ import time
 import os
 import random
 from tgpush import post_tg
-import dingpush_encryption
+from dingpush_encryption import dingding_bot,post_ding
 TG_TOKEN = os.getenv("TG_TOKEN")	#TG机器人的TOKEN
 CHAT_ID = os.getenv("CHAT_ID")	    #推送消息的CHAT_ID
 DD_BOT_TOKEN = os.getenv("DD_BOT_TOKEN")
