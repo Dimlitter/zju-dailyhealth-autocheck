@@ -6,8 +6,11 @@ import time
 import os
 import random
 from tgpush import post_tg
+import dingpush_encryption
 TG_TOKEN = os.getenv("TG_TOKEN")	#TG机器人的TOKEN
 CHAT_ID = os.getenv("CHAT_ID")	    #推送消息的CHAT_ID
+DD_BOT_TOKEN = os.getenv("DD_BOT_TOKEN")
+DD_BOT_SECRET=os.getenv("DD_BOT_SECRET") #哈希算法验证(可选)
 
 #签到程序模块
 class LoginError(Exception):
@@ -289,14 +292,29 @@ class HealthCheckInHelper(ZJULogin):
             # print(geo_info)
             res = self.take_in(geo_info)
             print(res)
+            #TG推送
             if CHAT_ID is None or TG_TOKEN is None :
                 print("telegram推送未配置，请自行查看签到结果")
             else:   
                 #调用tg推送模块
                 post_tg('浙江大学每日健康打卡 V1.3 '+ " \n\n 签到结果: " + res.get("m")) 
+                
+            #钉钉推送
+            if DD_BOT_TOKEN is not None :
+                if DD_BOT_SECRET is None : 
+                    msg = "" 
+                    reminders = ['浙江大学每日健康打卡 V1.3 '+ " \n\n 签到结果: " + res.get("m")]
+                    url = f'https://oapi.dingtalk.com/robot/send?access_token={DD_BOT_TOKEN}' 
+                    print(post_ding(url, reminders, msg))
+                else :
+                    title = "浙江大学每日健康打卡 V1.3"
+                    content = " \n\n 签到结果: " + res.get("m")
+                    dingding_bot(title,content)
+                
         except requests.exceptions.ConnectionError as err:
             # reraise as KubeException, but log stacktrace.
             #调用tg推送模块
+            print("统一认证平台登录失败,请检查github服务器网络状态")
             post_tg('统一认证平台登录失败,请检查github服务器网络状态')
 
 
