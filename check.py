@@ -300,7 +300,9 @@ class HealthCheckInHelper(ZJULogin):
                 post_tg('浙江大学每日健康打卡 V1.3 '+ " \n\n 签到结果: " + res.get("m")) 
                 
             #钉钉推送
-            if DD_BOT_TOKEN is not None :
+            if DD_BOT_TOKEN is None :
+                print("未启用钉钉推送")
+            else :
                 if DD_BOT_SECRET is None : 
                     msg = "" 
                     reminders = ['浙江大学每日健康打卡 V1.3 '+ " \n\n 签到结果: " + res.get("m")]
