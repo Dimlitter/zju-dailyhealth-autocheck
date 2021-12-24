@@ -5,6 +5,7 @@ import time
 import json
 import hashlib
 import base64
+import os
 
 """
 钉钉 消息推送模块
