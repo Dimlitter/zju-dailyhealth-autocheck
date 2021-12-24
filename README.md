@@ -34,13 +34,17 @@ Mrli学长原库链接：https://github.com/Freedomisgood/When_Coding_in_ZJU/tre
  > 
  > lat:所打卡位置的纬度
 
-### 可选 tg bot推送
+### 可选 多样化推送
  
  >TG_TOKEN: tg bot的token 通过私聊 @botfather 获得
  >
  >CHAT_ID：你账号的ID 可以通过私聊 @userinfobot 获取
-
+ >
+ >DD_BOT_TOKEN: 钉钉自定义机器人的webhook后面的内容，只需 https://oapi.dingtalk.com/robot/send?access_token=XXX 等于=符号后面的XXX即可
+ >
+ >DD_BOT_SECRET (可选)：钉钉机器人的加签密钥，如果不选择，则需在第一项添加自定义关键词"健康打卡"或其他关键词
 ## 更新日志 
+### 2021.12.24 加入钉钉机器人推送
 ### 2021.12.22 更新统一认证平台登录
 ### 2021.12.05 更新打卡参数
 ### 2021.11.27 打卡界面发生变化 无需更新仍可使用
