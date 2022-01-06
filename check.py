@@ -304,8 +304,8 @@ class HealthCheckInHelper(ZJULogin):
                 print("未启用钉钉推送")
             else :
                 if DD_BOT_SECRET is None : 
-                    msg = "" 
-                    reminders = ['浙江大学每日健康打卡 V1.3 '+ " \n\n 签到结果: " + res.get("m")]
+                    msg = '浙江大学每日健康打卡 V1.3 '+ " \n\n 签到结果: " + res.get("m")
+                    reminders = [""] #提醒，填入手机号
                     url = f'https://oapi.dingtalk.com/robot/send?access_token={DD_BOT_TOKEN}' 
                     print(post_ding(url, reminders, msg))
                 else :
