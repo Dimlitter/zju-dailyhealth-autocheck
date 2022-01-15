@@ -157,10 +157,10 @@ class HealthCheckInHelper(ZJULogin):
 
         # 获得id和uid参数
         res = self.sess.get(self.BASE_URL, headers=self.headers)
-        #html = res.content.decode()
-        #new_info_tmp = json.loads(re.findall(r'def = ({[^\n]+})', html)[0])
-        #new_id = new_info_tmp['id']
-        #new_uid = new_info_tmp['uid']
+        html = res.content.decode()
+        new_info_tmp = json.loads(re.findall(r'def = ({[^\n]+})', html)[0])
+        new_id = new_info_tmp['id']
+        new_uid = new_info_tmp['uid']
         # 拼凑geo信息
         lng, lat = address_component.get("streetNumber").get("location").split(",")
         geo_api_info_dict = {"type": "complete", "info": "SUCCESS", "status": 1, "cEa": "jsonp_859544_",
