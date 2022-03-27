@@ -1,6 +1,14 @@
 name: autocheck
 
 on:
+  workflow_dispatch:
+    inputs:
+      logLevel:
+        description: 'Log level'
+        required: true
+        default: 'info'
+      tags:
+        description: 'run manually'
   push:
   pull_request:
   watch:
