@@ -6,11 +6,7 @@ import time
 import os
 import random
 from tgpush import post_tg
-from dingpush_encryption import dingding_bot,post_ding
-TG_TOKEN = os.getenv("TG_TOKEN")	#TG机器人的TOKEN
-CHAT_ID = os.getenv("CHAT_ID")	    #推送消息的CHAT_ID
-DD_BOT_TOKEN = os.getenv("DD_BOT_TOKEN")
-DD_BOT_SECRET=os.getenv("DD_BOT_SECRET") #哈希算法验证(可选)
+from Dingpush import dingpush
 
 #签到程序模块
 class LoginError(Exception):
@@ -60,6 +56,15 @@ class ZJULogin(object):
         self.password = password
         self.delay_run = delay_run
         self.sess = requests.Session()
+        
+        self.TG_TOKEN = os.getenv("TG_TOKEN")	#TG机器人的TOKEN
+        self.CHAT_ID = os.getenv("CHAT_ID")	    #推送消息的CHAT_ID
+        self.DD_BOT_TOKEN = os.getenv("DD_BOT_TOKEN")
+        self.DD_BOT_SECRET=os.getenv("DD_BOT_SECRET") #哈希算法验证(可选)
+        self.reminders = os.getenv("REMINDERS")
+
+        self.lng= os.getenv("lng")
+        self.lat= os.getenv("lat")
 
     def login(self):
         """Login to ZJU platform"""
@@ -197,7 +202,7 @@ class HealthCheckInHelper(ZJULogin):
             'sfyxjzxgym': '1',
             # 是否不宜接种人群
             'sfbyjzrq': '5',
-            'jzxgymqk': '5', # 这里是第三针相关参数，1是已接种第一针，4是已接种第二针（已满6个月），5是已接种第二针（未满6个月），6是已接种第三针，3是未接种，记得自己改
+            'jzxgymqk': '6', # 这里是第三针相关参数，1是已接种第一针，4是已接种第二针（已满6个月），5是已接种第二针（未满6个月），6是已接种第三针，3是未接种，记得自己改
             'tw': '0',
             'sfcxtz': '0',
             'sfjcbh': '0',
@@ -222,8 +227,8 @@ class HealthCheckInHelper(ZJULogin):
             # 杭州市
             # '\u676D\u5DDE\u5E02'
             'city': address_component.get("city"),
-            # 是否在校：这里写的是没有在校，在校将'sfzx'改为1
-            'sfzx': '0', 
+            # 是否在校：在校将'sfzx'改为1
+            'sfzx': '1', 
             'sfjcwhry': '0',
             'sfjchbry': '0',
             'sfcyglq': '0',
@@ -251,7 +256,7 @@ class HealthCheckInHelper(ZJULogin):
             'fxyy': '',
             'jcjg': '',
             # uid每个用户不一致
-            'uid': new_uid,     # 又有了
+            'uid': new_uid,     
             # id每个用户不一致
             'id': new_id,
             # 下列原来参数都是12.1新版没有的
@@ -263,19 +268,30 @@ class HealthCheckInHelper(ZJULogin):
             'gtjzzfjsj': '',
             'gwszdd': '',
             'szgjcs': '',
-            'ismoved': '1', # 位置变化了，我回家了:) 到家之后记得改成0
+            'ismoved': '0', # 位置变化为1，不变为0
             'zgfx14rfhsj':'',
         }
         response = self.sess.post('https://healthreport.zju.edu.cn/ncov/wap/default/save', data=data,
                                   headers=self.headers)
         return response.json()
 
+    def Push(self,res):
+        if self.CHAT_ID and self.TG_TOKEN :
+            post_tg('浙江大学每日健康打卡 V2.0 '+ " \n\n 签到结果: " + res) 
+        else:
+            print("telegram推送未配置，请自行查看签到结果")
+        if self.DD_BOT_TOKEN:
+            ding= dingpush('浙江大学每日健康打卡 V2.0 ', res,self.reminders,self.DD_BOT_TOKEN,self.DD_BOT_SECRET)
+            ding.SelectAndPush()
+        else:
+            print("钉钉推送未配置，请自行查看签到结果")
+        print("推送完成！")
+        
     def run(self):
         print("正在为{}健康打卡".format(self.username))
         if self.delay_run:
             # 确保定时脚本执行时间不太一致
-            time.sleep(random.randint(0, 10))
-        # 拿到Cookies和headers
+            time.sleep(random.randint(10, 100))
         try:
             self.login()
             # 拿取eai-sess的cookies信息
@@ -283,58 +299,24 @@ class HealthCheckInHelper(ZJULogin):
             # 由于IP定位放到服务器上运行后会是服务器的IP定位
             # location = get_ip_location()
             # print(location)
-            lng= os.getenv("lng")
-            lat= os.getenv("lat")
-            location = {'info': 'LOCATE_SUCCESS', 'status': 1, 'lng': lng, 'lat': lat}
+            location = {'info': 'LOCATE_SUCCESS', 'status': 1, 'lng': self.lng, 'lat': self.lat}
             geo_info = self.get_geo_info(location)
             # print(geo_info)
             res = self.take_in(geo_info)
+
             print(res)
-            #TG推送
-            if CHAT_ID is None or TG_TOKEN is None :
-                print("telegram推送未配置，请自行查看签到结果")
-            else:   
-                #调用tg推送模块
-                post_tg('浙江大学每日健康打卡 V1.3 '+ " \n\n 签到结果: " + res.get("m")) 
-                
-            #钉钉推送
-            if DD_BOT_TOKEN is None :
-                print("未启用钉钉推送")
-            else :
-                if DD_BOT_SECRET is None : 
-                    msg = '浙江大学每日健康打卡 V1.3 '+ " \n\n 签到结果: " + res.get("m")
-                    reminders = [""] #提醒，填入手机号
-                    url = f'https://oapi.dingtalk.com/robot/send?access_token={DD_BOT_TOKEN}' 
-                    print(post_ding(url, reminders, msg))
-                else :
-                    title = "浙江大学每日健康打卡 V1.3"
-                    content = " \n\n 签到结果: " + res.get("m")
-                    dingding_bot(title,content)
-                
+            self.Push(res.get("m"))
+
         except requests.exceptions.ConnectionError as err:
             # reraise as KubeException, but log stacktrace.
             #调用tg推送模块
             print("统一认证平台登录失败,请检查github服务器网络状态")
-            post_tg('统一认证平台登录失败,请检查github服务器网络状态')
-
-
-
+            self.Push('统一认证平台登录失败,请检查github服务器网络状态')
+                
 if __name__ == '__main__':
-    f_name = "account.json"
-    # 填写要自动打卡的：账号 密码, 然后自己实现循环即可帮多人打卡
-    # aps = [("<username>", "<password>")]
+    # 因为是github action版本，所以不加上循环多人打卡功能   
     account = os.getenv("account")
     pwd = os.getenv("pwd")
-    if account == "" or pwd == "":
-        if not os.path.exists(f_name):
-            with open(f_name, "w") as f:
-                account, pwd = input("未配置账号密码，请添加secrets").split()
-                json.dump({"account": account, "password": pwd}, f)
-        else:
-            with open(f_name, "r") as f:
-                d = json.load(f)
-                account, pwd = d.get("account"), d.get("password")
-
     s = HealthCheckInHelper(account, pwd, delay_run=True)
     s.run() 
  

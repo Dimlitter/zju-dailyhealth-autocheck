@@ -1,14 +1,7 @@
-name: autocheck
+name: AutoCheck
 
 on:
   workflow_dispatch:
-    inputs:
-      logLevel:
-        description: 'Log level'
-        required: true
-        default: 'info'
-      tags:
-        description: 'run manually'
   push:
   pull_request:
   watch:
@@ -27,11 +20,9 @@ jobs:
       with:
           python-version: '3.8'
     - name: 'Install dependencies'
-      run: python -m pip install --upgrade requests
-           |python -m pip install --upgrade pip
-           |apt-get install pip3
-           |pip3 install requests
-    - name: sign
+      run: python3 -m pip install --upgrade pip|apt-get install pip3|pip3 install requests
+
+    - name: StratCheck
       env:
        account: ${{ secrets.account }}
        pwd: ${{ secrets.pwd }}
