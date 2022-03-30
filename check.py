@@ -46,7 +46,7 @@ class ZJULogin(object):
         sess: (requests.Session) 统一的session管理
     """
     headers = {
-        'user-agent': 'Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/92.0.4515.159 Safari/537.36',
+        'user-agent': 'Mozilla/5.0 (Linux; U; Android 11; zh-CN; M2012K11AC Build/RKQ1.200826.002) AppleWebKit/537.36 (KHTML, like Gecko) Version/4.0 Chrome/69.0.3497.100 UWS/3.22.0.36 Mobile Safari/537.36 AliApp(DingTalk/6.0.7.1) com.alibaba.android.rimet.zju/14785964 Channel/1543545060864 language/zh-CN 2ndType/exclusive UT4Aplus/0.2.25 colorScheme/light',
     }
     BASE_URL = "https://healthreport.zju.edu.cn/ncov/wap/default/index"
     LOGIN_URL = "https://zjuam.zju.edu.cn/cas/login?service=http%3A%2F%2Fservice.zju.edu.cn%2F"
@@ -101,7 +101,7 @@ class ZJULogin(object):
 
 class HealthCheckInHelper(ZJULogin):
     headers = {
-        'user-agent': 'Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/92.0.4515.159 Safari/537.36',
+        'user-agent': 'Mozilla/5.0 (Linux; U; Android 11; zh-CN; M2012K11AC Build/RKQ1.200826.002) AppleWebKit/537.36 (KHTML, like Gecko) Version/4.0 Chrome/69.0.3497.100 UWS/3.22.0.36 Mobile Safari/537.36 AliApp(DingTalk/6.0.7.1) com.alibaba.android.rimet.zju/14785964 Channel/1543545060864 language/zh-CN 2ndType/exclusive UT4Aplus/0.2.25 colorScheme/light',
     }
 
     REDIRECT_URL = "https://zjuam.zju.edu.cn/cas/login?service=https%3A%2F%2Fhealthreport.zju.edu.cn%2Fa_zju%2Fapi%2Fsso%2Findex%3Fredirect%3Dhttps%253A%252F%252Fhealthreport.zju.edu.cn%252Fncov%252Fwap%252Fdefault%252Findex%26from%3Dwap"
@@ -113,7 +113,7 @@ class HealthCheckInHelper(ZJULogin):
             'cache-control': 'no-cache',
             'sec-ch-ua': '"Chromium";v="92", " Not A;Brand";v="99", "Google Chrome";v="92"',
             'sec-ch-ua-mobile': '?0',
-            'user-agent': 'Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/92.0.4515.159 Safari/537.36',
+            'user-agent': 'Mozilla/5.0 (Linux; U; Android 11; zh-CN; M2012K11AC Build/RKQ1.200826.002) AppleWebKit/537.36 (KHTML, like Gecko) Version/4.0 Chrome/69.0.3497.100 UWS/3.22.0.36 Mobile Safari/537.36 AliApp(DingTalk/6.0.7.1) com.alibaba.android.rimet.zju/14785964 Channel/1543545060864 language/zh-CN 2ndType/exclusive UT4Aplus/0.2.25 colorScheme/light',
             'accept': '*/*',
             'sec-fetch-site': 'cross-site',
             'sec-fetch-mode': 'no-cors',
@@ -168,9 +168,9 @@ class HealthCheckInHelper(ZJULogin):
         new_uid = new_info_tmp['uid']
         # 拼凑geo信息
         lng, lat = address_component.get("streetNumber").get("location").split(",")
-        geo_api_info_dict = {"type": "complete", "info": "SUCCESS", "status": 1, "cEa": "jsonp_859544_",
+        geo_api_info_dict = {"type": "complete", "info": "SUCCESS", "status": 1, 
                              "position": {"Q": lat, "R": lng, "lng": lng, "lat": lat},
-                             "message": "Get ipLocation success.Get address success.", "location_type": "ip",
+                             "message": "Get geolocation success.Convert Success.Get address success.", "location_type": "ip",
                              "accuracy": "null", "isConverted": "true", "addressComponent": address_component,
                              "formattedAddress": formatted_address, "roads": [], "crosses": [], "pois": []}
 
@@ -207,6 +207,7 @@ class HealthCheckInHelper(ZJULogin):
             'sfcxtz': '0',
             'sfjcbh': '0',
             'sfcxzysx': '0',
+            'jcjg': '',
             'qksm': '',
             'sfyyjc': '0',
             'jcjgqr': '0',
@@ -216,6 +217,7 @@ class HealthCheckInHelper(ZJULogin):
             'address': formatted_address,
             # {"type":"complete","info":"SUCCESS","status":1,"cEa":"jsonp_859544_","position":{"Q":30.30678,"R":120.06375000000003,"lng":120.06375,"lat":30.30678},"message":"Get ipLocation success.Get address success.","location_type":"ip","accuracy":null,"isConverted":true,"addressComponent":{"citycode":"0571","adcode":"330106","businessAreas":[],"neighborhoodType":"","neighborhood":"","building":"","buildingType":"","street":"西园三路","streetNumber":"1号","country":"中国","province":"浙江省","city":"杭州市","district":"西湖区","township":"三墩镇"},"formattedAddress":"浙江省杭州市西湖区三墩镇西湖国家广告产业园西湖广告大厦","roads":[],"crosses":[],"pois":[]}
             # '{"type":"complete","info":"SUCCESS","status":1,"cEa":"jsonp_859544_","position":{"Q":30.30678,"R":120.06375000000003,"lng":120.06375,"lat":30.30678},"message":"Get ipLocation success.Get address success.","location_type":"ip","accuracy":null,"isConverted":true,"addressComponent":{"citycode":"0571","adcode":"330106","businessAreas":[],"neighborhoodType":"","neighborhood":"","building":"","buildingType":"","street":"\u897F\u56ED\u4E09\u8DEF","streetNumber":"1\u53F7","country":"\u4E2D\u56FD","province":"\u6D59\u6C5F\u7701","city":"\u676D\u5DDE\u5E02","district":"\u897F\u6E56\u533A","township":"\u4E09\u58A9\u9547"},"formattedAddress":"\u6D59\u6C5F\u7701\u676D\u5DDE\u5E02\u897F\u6E56\u533A\u4E09\u58A9\u9547\u897F\u6E56\u56FD\u5BB6\u5E7F\u544A\u4EA7\u4E1A\u56ED\u897F\u6E56\u5E7F\u544A\u5927\u53A6","roads":[],"crosses":[],"pois":[]}',
+            # {"type":"complete","position":{"Q":30.30975640191,"R":120.085647515191,"lng":120.085648,"lat":30.309756},"location_type":"html5","message":"Get geolocation success.Convert Success.Get address success.","accuracy":40,"isConverted":true,"status":1,"addressComponent":{"citycode":"0571","adcode":"330106","businessAreas":[],"neighborhoodType":"","neighborhood":"","building":"","buildingType":"","street":"龙宇街","streetNumber":"17-18号","country":"中国","province":"浙江省","city":"杭州市","district":"西湖区","towncode":"330106109000","township":"三墩镇"},"formattedAddress":"浙江省杭州市西湖区三墩镇翠柏浙江大学(紫金港校区)","roads":[],"crosses":[],"pois":[],"info":"SUCCESS"}
             'geo_api_info': geo_api_info_dict,
             # 浙江省 杭州市 西湖区
             # '\u6D59\u6C5F\u7701 \u676D\u5DDE\u5E02 \u897F\u6E56\u533A'
@@ -239,7 +241,7 @@ class HealthCheckInHelper(ZJULogin):
             'bztcyy': '4', # 这里也变了
             'sftjhb': '0',
             'sftjwh': '0',
-            
+            'fjsj':	'0',
             # 👇-----12.1日修改-----👇
             'sfjcqz': '', #修改
             'jcqzrq': '',
@@ -270,6 +272,20 @@ class HealthCheckInHelper(ZJULogin):
             'szgjcs': '',
             'ismoved': '0', # 位置变化为1，不变为0
             'zgfx14rfhsj':'',
+             # 👇-----2022.3.30日修改-----👇
+            'jrdqjcqk': '',
+            'jcwhryfs': '',	
+            'jchbryfs': '',	
+            'xjzd': '',	
+            'sfsfbh':'0',
+            'jhfjrq':'',	
+            'jhfjjtgj':'',	
+            'jhfjhbcc':'',	
+            'jhfjsftjwh':'0',
+            'jhfjsftjhb':'0',
+            'szsqsfybl':'0',
+            'gwszgz':'',
+            # 👆-----2022.3.30日修改-----👆
         }
         response = self.sess.post('https://healthreport.zju.edu.cn/ncov/wap/default/save', data=data,
                                   headers=self.headers)
@@ -309,9 +325,8 @@ class HealthCheckInHelper(ZJULogin):
 
         except requests.exceptions.ConnectionError as err:
             # reraise as KubeException, but log stacktrace.
-            #调用tg推送模块
-            print("统一认证平台登录失败,请检查github服务器网络状态")
-            self.Push('统一认证平台登录失败,请检查github服务器网络状态')
+            print("打卡失败,请检查github服务器网络状态")
+            self.Push('打卡失败,请检查github服务器网络状态')
                 
 if __name__ == '__main__':
     # 因为是github action版本，所以不加上循环多人打卡功能   

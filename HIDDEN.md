@@ -15,7 +15,7 @@
 ## 写在前面
 Fork自[Mrli](https://github.com/Freedomisgood)学长，我只是加了github action 执行以及推送功能
 
-[Mrli学长原库链接]：(https://github.com/Freedomisgood/When_Coding_in_ZJU/tree/main/Health_Checkin)
+Mrli学长原库链接：https://github.com/Freedomisgood/When_Coding_in_ZJU/tree/main/Health_Checkin
 
 `交流群组`：https://t.me/zjuers 
 
@@ -41,15 +41,16 @@ DD_BOT_TOKEN: 钉钉自定义机器人的webhook后面的内容，只需 https:/
 DD_BOT_SECRET (可选)：钉钉机器人的加签密钥，如果不选择，则需在第一项添加自定义关键词"健康打卡"或其他关键词
 ```
 <details> <summary> <font size=5>更新日志</font></summary>
+
+2022.3.30 更新data包，将UA替换成钉钉内置浏览器UA<br>
 2022.3.28 重新排版readme以及重构代码<br>
 2022.1.15 更新data包，根据个人情况需要修改，请在check.py的172行后根据注释自行修改<br>
 2021.12.24 加入钉钉机器人推送<br>
 2021.12.22 更新统一认证平台登录<br>
 2021.12.05 更新打卡参数<br>
 2021.11.27 打卡界面发生变化 无需更新仍可使用<br>
-2021.10.28 pysocks问题无法解决，创建dev分支<br>
-2021.10.27 添加socks5代理功能，使用国内ip，增加打卡隐蔽性<br>
-
+~~2021.10.28 pysocks问题无法解决，创建dev分支<br>~~
+~~2021.10.27 添加socks5代理功能，使用国内ip，增加打卡隐蔽性<br>~~
 感谢 [LittleYe233](https://github.com/LittleYe233) 的大力支持<br>
 2021.10.24 tg推送模块分离<br>
 感谢 [zxc2012](https://github.com/zxc2012) 增加的平台登录检查功能<br>
@@ -58,9 +59,9 @@ DD_BOT_SECRET (可选)：钉钉机器人的加签密钥，如果不选择，则�
 </details>
 
 ## TO DO
- - [x] 增加socks5代理功能，以解决github action服务器访问国内网站不稳定的问题（已实现，查看dev分支）
+ - [ ] 增加socks5代理功能，以解决github action服务器访问国内网站不稳定的问题
  - [ ] 实现多样化推送渠道
- - [ ] 模拟真实打卡UA/随机UA
+ - [x] 模拟真实打卡UA/随机UA
 
 ## 声明
 

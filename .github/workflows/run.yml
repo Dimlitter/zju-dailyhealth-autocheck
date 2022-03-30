@@ -7,7 +7,7 @@ on:
   watch:
     types: [ started ]
   schedule:
-    - cron: 23 8  * * *
+    - cron: 45 22  * * *
 
 jobs:
   healthcheck:
@@ -20,7 +20,10 @@ jobs:
       with:
           python-version: '3.8'
     - name: 'Install dependencies'
-      run: python3 -m pip install --upgrade pip|apt-get install pip3|pip3 install requests
+      run: python3 -m pip install --upgrade pip
+
+    - name: 'install libs'
+      run: pip3 install requests
 
     - name: StratCheck
       env:
@@ -32,5 +35,5 @@ jobs:
        lat: ${{ secrets.lat }}
        DD_BOT_TOKEN: ${{ secrets.DD_BOT_TOKEN }}
        DD_BOT_SECRET: ${{ secrets.DD_BOT_SECRET }}
-      run: |
-       python3 check.py
+       REMINDERS: ${{ secrets.REMINDERS }}
+      run: python3 check.py
