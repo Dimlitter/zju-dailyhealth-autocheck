@@ -162,6 +162,9 @@ class HealthCheckInHelper(ZJULogin):
 
         # 获得id和uid参数
         res = self.sess.get(self.BASE_URL, headers=self.headers)
+        if len(res.content) == 0:
+            print('网页获取失败，请检查网络并重试')
+            self.Push('网页获取失败，请检查网络并重试')
         html = res.content.decode()
         new_info_tmp = json.loads(re.findall(r'def = ({[^\n]+})', html)[0])
         new_id = new_info_tmp['id']
@@ -323,7 +326,7 @@ class HealthCheckInHelper(ZJULogin):
             print(res)
             self.Push(res.get("m"))
 
-        except requests.exceptions.ConnectionError as err:
+        except requests.exceptions.ConnectionError :
             # reraise as KubeException, but log stacktrace.
             print("打卡失败,请检查github服务器网络状态")
             self.Push('打卡失败,请检查github服务器网络状态')
