@@ -311,16 +311,17 @@ class HealthCheckInHelper(ZJULogin):
             return response.json()
 
     def Push(self,res):
-        if self.CHAT_ID and self.TG_TOKEN :
-            post_tg('浙江大学每日健康打卡 V2.0 '+ " \n\n 签到结果: " + res, self.CHAT_ID, self.TG_TOKEN) 
-        else:
-            print("telegram推送未配置，请自行查看签到结果")
-        if self.DD_BOT_TOKEN:
-            ding= dingpush('浙江大学每日健康打卡 V2.0 ', res,self.reminders,self.DD_BOT_TOKEN,self.DD_BOT_SECRET)
-            ding.SelectAndPush()
-        else:
-            print("钉钉推送未配置，请自行查看签到结果")
-        print("推送完成！")
+        if not res:
+            if self.CHAT_ID and self.TG_TOKEN :
+                post_tg('浙江大学每日健康打卡 V2.0 '+ " \n\n 签到结果: " + res, self.CHAT_ID, self.TG_TOKEN) 
+            else:
+                print("telegram推送未配置，请自行查看签到结果")
+            if self.DD_BOT_TOKEN:
+                ding= dingpush('浙江大学每日健康打卡 V2.0 ', res,self.reminders,self.DD_BOT_TOKEN,self.DD_BOT_SECRET)
+                ding.SelectAndPush()
+            else:
+                print("钉钉推送未配置，请自行查看签到结果")
+            print("推送完成！")
         
     def run(self):
         print("正在为{}健康打卡".format(self.username))
