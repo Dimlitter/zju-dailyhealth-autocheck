@@ -42,6 +42,7 @@ DD_BOT_SECRET (可选)：钉钉机器人的加签密钥，如果不选择，则�
 ```
 <details> <summary> <font size=5>更新日志</font></summary>
 
+2022.4.6 增加获取验证键值，更新`campus`参数<br>
 2022.3.30 更新data包，将UA替换成钉钉内置浏览器UA<br>
 2022.3.28 重新排版readme以及重构代码<br>
 2022.1.15 更新data包，根据个人情况需要修改，请在check.py的172行后根据注释自行修改<br>
