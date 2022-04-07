@@ -161,16 +161,19 @@ class HealthCheckInHelper(ZJULogin):
         if not formatted_address or not address_component: return
 
         # 获得id和uid参数
+        time.sleep(3)
         res = self.sess.get(self.BASE_URL, headers=self.headers)
         if len(res.content) == 0:
             print('网页获取失败，请检查网络并重试')
             self.Push('网页获取失败，请检查网络并重试')
         html = res.content.decode()
         try:
-            done = re.findall('每天只能填报一次，你已提交过',html)[0]
-            self.Push(done)
+            done = re.findall('温馨提示： 不外出、不聚集、不吃野味， 戴口罩、勤洗手、咳嗽有礼，开窗通风，发热就诊',html)[0]
             print(done)
         except:
+            print('打卡网页获取失败')
+            self.Push('打卡网页获取失败')
+        finally:
             new_info_tmp = json.loads(re.findall(r'def = ({[^\n]+})', html)[0])
             new_id = new_info_tmp['id']
             new_uid = new_info_tmp['uid']
