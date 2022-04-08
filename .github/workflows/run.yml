@@ -15,6 +15,17 @@ jobs:
 
     steps:
     - uses: actions/checkout@v2
+    
+    - name: Sync with upstream
+      if: github.repository != 'Dimlitter/zju-dailyhealth-autocheck'
+      continue-on-error: true
+      uses: aormsby/Fork-Sync-With-Upstream-action@v3.2
+      with:
+        upstream_sync_repo: Dimlitter/zju-dailyhealth-autocheck
+        upstream_sync_branch: main
+        target_sync_branch: main
+        git_pull_args: '-s recursive -Xtheirs'
+        
     - name: 'Set python'
       uses: actions/setup-python@v1
       with:
@@ -36,4 +47,5 @@ jobs:
        DD_BOT_TOKEN: ${{ secrets.DD_BOT_TOKEN }}
        DD_BOT_SECRET: ${{ secrets.DD_BOT_SECRET }}
        REMINDERS: ${{ secrets.REMINDERS }}
+       
       run: python3 check.py
