@@ -40,7 +40,7 @@ jobs:
     - name: StratCheck
       env:
        account: ${{ secrets.account }}
-       pwd: ${{ secrets.pwd }}
+       password: ${{ secrets.password }}
        TG_TOKEN: ${{ secrets.TG_TOKEN }}
        CHAT_ID: ${{ secrets.CHAT_ID }}
        lng: ${{ secrets.lng }}
