@@ -35,7 +35,7 @@ jobs:
       run: python3 -m pip install --upgrade pip
 
     - name: 'install libs'
-      run: pip3 install requests
+      run: pip3 install requests && pip install ddddocr
 
     - name: StratCheck
       env:

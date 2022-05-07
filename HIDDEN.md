@@ -24,7 +24,7 @@ Mrli学长原库链接：https://github.com/Freedomisgood/When_Coding_in_ZJU/tre
 ```
 account:通行证账号
  
-pwd:通行证密码
+password:通行证密码
 
 lng:所打卡位置的经度 
 
@@ -32,6 +32,7 @@ lat:所打卡位置的纬度
 ```
 ## 可选参数`推送相关`
  ```
+ 
 TG_TOKEN: tg bot的token 通过私聊 @botfather 获得
 
 CHAT_ID：你账号的ID 可以通过私聊 @userinfobot 获取
@@ -39,9 +40,13 @@ CHAT_ID：你账号的ID 可以通过私聊 @userinfobot 获取
 DD_BOT_TOKEN: 钉钉自定义机器人的webhook后面的内容，只需 https://oapi.dingtalk.com/robot/send?access_token=XXX 等于=符号后面的XXX即可
 
 DD_BOT_SECRET (可选)：钉钉机器人的加签密钥，如果不选择，则需在第一项添加自定义关键词"健康打卡"或其他关键词
+
+REMINDERS : 钉钉机器人需要@的用户
+
 ```
 <details> <summary> <font size=5>更新日志</font></summary>
 
+2022.5.7 针对平台验证码，加入验证码识别功能<br>
 2022.4.6 增加获取验证键值，更新`campus`参数<br>
 2022.3.30 更新data包，将UA替换成钉钉内置浏览器UA<br>
 2022.3.28 重新排版readme以及重构代码<br>

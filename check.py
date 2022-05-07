@@ -5,8 +5,9 @@ import datetime
 import time
 import os
 import random
-from tgpush import post_tg
-from Dingpush import dingpush
+from notify.tgpush import post_tg
+from notify.Dingpush import dingpush
+from utils import verify
 
 #签到程序模块
 class LoginError(Exception):
@@ -48,14 +49,15 @@ class ZJULogin(object):
     headers = {
         'user-agent': 'Mozilla/5.0 (Linux; U; Android 11; zh-CN; M2012K11AC Build/RKQ1.200826.002) AppleWebKit/537.36 (KHTML, like Gecko) Version/4.0 Chrome/69.0.3497.100 UWS/3.22.0.36 Mobile Safari/537.36 AliApp(DingTalk/6.0.7.1) com.alibaba.android.rimet.zju/14785964 Channel/1543545060864 language/zh-CN 2ndType/exclusive UT4Aplus/0.2.25 colorScheme/light',
     }
-    BASE_URL = "https://healthreport.zju.edu.cn/ncov/wap/default/index"
-    LOGIN_URL = "https://zjuam.zju.edu.cn/cas/login?service=http%3A%2F%2Fservice.zju.edu.cn%2F"
 
     def __init__(self, username, password, delay_run=False):
         self.username = username
         self.password = password
         self.delay_run = delay_run
         self.sess = requests.Session()
+        self.imgaddress = 'https://healthreport.zju.edu.cn/ncov/wap/default/code'
+        self.BASE_URL = "https://healthreport.zju.edu.cn/ncov/wap/default/index"
+        self.LOGIN_URL = "https://zjuam.zju.edu.cn/cas/login?service=http%3A%2F%2Fservice.zju.edu.cn%2F"
         
         self.TG_TOKEN = os.getenv("TG_TOKEN")	#TG机器人的TOKEN
         self.CHAT_ID = os.getenv("CHAT_ID")	    #推送消息的CHAT_ID
@@ -170,6 +172,17 @@ class HealthCheckInHelper(ZJULogin):
         try:
             done = re.findall('温馨提示： 不外出、不聚集、不吃野味， 戴口罩、勤洗手、咳嗽有礼，开窗通风，发热就诊',html)[0]
             print(done)
+            try:
+                res = self.sess.get(self.imgaddress, headers=self.headers)
+                code_get = verify.getcode(res.content)
+                code = code_get.main()
+                if not code :
+                    self.Push('验证码识别失败，请重试')
+                    return
+                else:
+                    self.Push('验证码识别成功，请稍后')
+            except:
+                print('验证码识别失败')
         except:
             print('打卡网页获取失败')
             self.Push('打卡网页获取失败')
@@ -184,7 +197,7 @@ class HealthCheckInHelper(ZJULogin):
                                 "message": "Get geolocation success.Convert Success.Get address success.", "location_type": "ip",
                                 "accuracy": "null", "isConverted": "true", "addressComponent": address_component,
                                 "formattedAddress": formatted_address, "roads": [], "crosses": [], "pois": []}
-            print('打卡地点：', formatted_address)
+            #print('打卡地点：', formatted_address)
             #拿到校验值
             verify_data = re.findall(r'"([a-z0-9]*?)": "([0-9]*?)","([a-z0-9]*?)":"([a-z0-9]*?)"',html)[0]
             verify_code = {
@@ -229,11 +242,7 @@ class HealthCheckInHelper(ZJULogin):
                 'sfyyjc': '0',
                 'jcjgqr': '0',
                 'remark': '',
-                # 浙江省杭州市西湖区三墩镇西湖国家广告产业园西湖广告大厦
-                # '\u6D59\u6C5F\u7701\u676D\u5DDE\u5E02\u897F\u6E56\u533A\u4E09\u58A9\u9547\u897F\u6E56\u56FD\u5BB6\u5E7F\u544A\u4EA7\u4E1A\u56ED\u897F\u6E56\u5E7F\u544A\u5927\u53A6',
                 'address': formatted_address,
-                # {"type":"complete","info":"SUCCESS","status":1,"cEa":"jsonp_859544_","position":{"Q":30.30678,"R":120.06375000000003,"lng":120.06375,"lat":30.30678},"message":"Get ipLocation success.Get address success.","location_type":"ip","accuracy":null,"isConverted":true,"addressComponent":{"citycode":"0571","adcode":"330106","businessAreas":[],"neighborhoodType":"","neighborhood":"","building":"","buildingType":"","street":"西园三路","streetNumber":"1号","country":"中国","province":"浙江省","city":"杭州市","district":"西湖区","township":"三墩镇"},"formattedAddress":"浙江省杭州市西湖区三墩镇西湖国家广告产业园西湖广告大厦","roads":[],"crosses":[],"pois":[]}
-                # '{"type":"complete","info":"SUCCESS","status":1,"cEa":"jsonp_859544_","position":{"Q":30.30678,"R":120.06375000000003,"lng":120.06375,"lat":30.30678},"message":"Get ipLocation success.Get address success.","location_type":"ip","accuracy":null,"isConverted":true,"addressComponent":{"citycode":"0571","adcode":"330106","businessAreas":[],"neighborhoodType":"","neighborhood":"","building":"","buildingType":"","street":"\u897F\u56ED\u4E09\u8DEF","streetNumber":"1\u53F7","country":"\u4E2D\u56FD","province":"\u6D59\u6C5F\u7701","city":"\u676D\u5DDE\u5E02","district":"\u897F\u6E56\u533A","township":"\u4E09\u58A9\u9547"},"formattedAddress":"\u6D59\u6C5F\u7701\u676D\u5DDE\u5E02\u897F\u6E56\u533A\u4E09\u58A9\u9547\u897F\u6E56\u56FD\u5BB6\u5E7F\u544A\u4EA7\u4E1A\u56ED\u897F\u6E56\u5E7F\u544A\u5927\u53A6","roads":[],"crosses":[],"pois":[]}',
                 # {"type":"complete","position":{"Q":30.30975640191,"R":120.085647515191,"lng":120.085648,"lat":30.309756},"location_type":"html5","message":"Get geolocation success.Convert Success.Get address success.","accuracy":40,"isConverted":true,"status":1,"addressComponent":{"citycode":"0571","adcode":"330106","businessAreas":[],"neighborhoodType":"","neighborhood":"","building":"","buildingType":"","street":"龙宇街","streetNumber":"17-18号","country":"中国","province":"浙江省","city":"杭州市","district":"西湖区","towncode":"330106109000","township":"三墩镇"},"formattedAddress":"浙江省杭州市西湖区三墩镇翠柏浙江大学(紫金港校区)","roads":[],"crosses":[],"pois":[],"info":"SUCCESS"}
                 'geo_api_info': geo_api_info_dict,
                 # 浙江省 杭州市 西湖区
@@ -255,14 +264,12 @@ class HealthCheckInHelper(ZJULogin):
                 'glksrq': '',
                 'jcbhlx': '',
                 'jcbhrq': '',
-                'bztcyy': '4', # 这里也变了
+                'bztcyy': '4', 
                 'sftjhb': '0',
                 'sftjwh': '0',
                 'fjsj':	'0',
-                # 👇-----12.1日修改-----👇
-                'sfjcqz': '', #修改
+                'sfjcqz': '', 
                 'jcqzrq': '',
-                # 👆-----12.1日修改-----👆
                 'jrsfqzys': '',
                 'jrsfqzfy': '',
                 'sfyqjzgc': '',
@@ -278,7 +285,6 @@ class HealthCheckInHelper(ZJULogin):
                 'uid': new_uid,     
                 # id每个用户不一致
                 'id': new_id,
-                # 下列原来参数都是12.1新版没有的
                 # 日期
                 'date': get_date(),
                 'created': round(time.time()),
@@ -289,7 +295,6 @@ class HealthCheckInHelper(ZJULogin):
                 'szgjcs': '',
                 'ismoved': '0', # 位置变化为1，不变为0
                 'zgfx14rfhsj':'',
-                # 👇-----2022.3.30日修改-----👇
                 'jrdqjcqk': '',
                 'jcwhryfs': '',	
                 'jchbryfs': '',	
@@ -302,11 +307,10 @@ class HealthCheckInHelper(ZJULogin):
                 'jhfjsftjhb':'0',
                 'szsqsfybl':'0',
                 'gwszgz':'',
-                # 👆-----2022.3.30日修改-----👆
-
-                # 👇-----2022.4.6日修改-----👇
                 'campus': '紫金港校区', # 紫金港校区 玉泉校区 西溪校区 华家池校区 之江校区 海宁校区 舟山校区 宁波校区 工程师学院 杭州国际科创中心 其他
-                # 👆-----2022.4.6日修改-----👆
+                # 👇-----2022.5.7日修改-----👇
+                'verifyCode': code,
+                # 👆-----2022.5.7日修改-----👆
             }
             data.update(verify_code)
             response = self.sess.post('https://healthreport.zju.edu.cn/ncov/wap/default/save', data=data,
@@ -316,11 +320,11 @@ class HealthCheckInHelper(ZJULogin):
     def Push(self,res):
         if not res:
             if self.CHAT_ID and self.TG_TOKEN :
-                post_tg('浙江大学每日健康打卡 V2.0 '+ f" \n\n 签到结果:{res}", self.CHAT_ID, self.TG_TOKEN) 
+                post_tg('浙江大学每日健康打卡 V3.0 '+ f" \n\n 签到结果:{res}", self.CHAT_ID, self.TG_TOKEN) 
             else:
-                print("telegram推送未配置，请自行查看签到结果")
+                print("telegram推送未配置,请自行查看签到结果")
             if self.DD_BOT_TOKEN:
-                ding= dingpush('浙江大学每日健康打卡 V2.0 ', res,self.reminders,self.DD_BOT_TOKEN,self.DD_BOT_SECRET)
+                ding= dingpush('浙江大学每日健康打卡 V3.0 ', res,self.reminders,self.DD_BOT_TOKEN,self.DD_BOT_SECRET)
                 ding.SelectAndPush()
             else:
                 print("钉钉推送未配置，请自行查看签到结果")
@@ -335,17 +339,14 @@ class HealthCheckInHelper(ZJULogin):
             self.login()
             # 拿取eai-sess的cookies信息
             self.sess.get(self.REDIRECT_URL)
-            # 由于IP定位放到服务器上运行后会是服务器的IP定位
             # location = get_ip_location()
             # print(location)
             location = {'info': 'LOCATE_SUCCESS', 'status': 1, 'lng': self.lng, 'lat': self.lat}
             geo_info = self.get_geo_info(location)
             # print(geo_info)
             res = self.take_in(geo_info)
-
             print(res)
             self.Push(res)
-
         except requests.exceptions.ConnectionError :
             # reraise as KubeException, but log stacktrace.
             print("打卡失败,请检查github服务器网络状态")
@@ -354,7 +355,7 @@ class HealthCheckInHelper(ZJULogin):
 if __name__ == '__main__':
     # 因为是github action版本，所以不加上循环多人打卡功能   
     account = os.getenv("account")
-    pwd = os.getenv("pwd")
-    s = HealthCheckInHelper(account, pwd, delay_run=True)
+    password = os.getenv("password")
+    s = HealthCheckInHelper(account, password, delay_run=True)
     s.run() 
  
