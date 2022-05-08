@@ -37,7 +37,7 @@ jobs:
     - name: 'install libs'
       run: pip3 install requests && pip install ddddocr
 
-    - name: StratCheck
+    - name: StartCheck
       env:
        account: ${{ secrets.account }}
        pwd: ${{ secrets.pwd }}

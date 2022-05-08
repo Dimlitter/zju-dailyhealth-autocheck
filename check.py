@@ -318,7 +318,7 @@ class HealthCheckInHelper(ZJULogin):
             return response.json()
 
     def Push(self,res):
-        if not res:
+        if res:
             if self.CHAT_ID and self.TG_TOKEN :
                 post_tg('浙江大学每日健康打卡 V3.0 '+ f" \n\n 签到结果:{res}", self.CHAT_ID, self.TG_TOKEN) 
             else:
