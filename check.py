@@ -172,7 +172,7 @@ class HealthCheckInHelper(ZJULogin):
         try:
             done = re.findall('温馨提示： 不外出、不聚集、不吃野味， 戴口罩、勤洗手、咳嗽有礼，开窗通风，发热就诊',html)[0]
             print(done)
-            try:
+            '''try:
                 res = self.sess.get(self.imgaddress, headers=self.headers)
                 code_get = verify.getcode(res.content)
                 code = code_get.main()
@@ -182,7 +182,7 @@ class HealthCheckInHelper(ZJULogin):
                 else:
                     self.Push('验证码识别成功，请稍后')
             except:
-                print('验证码识别失败')
+                print('验证码识别失败')'''
         except:
             print('打卡网页获取失败')
             self.Push('打卡网页获取失败')
@@ -272,7 +272,7 @@ class HealthCheckInHelper(ZJULogin):
                 'jcqzrq': '',
                 'jrsfqzys': '',
                 'jrsfqzfy': '',
-                'sfyqjzgc': '',
+                'sfyqjzgc': '0',
                 # 是否申领杭州健康码
                 'sfsqhzjkk': '1',
                 # 杭州健康吗颜色，1:绿色 2:红色 3:黄色
@@ -308,9 +308,9 @@ class HealthCheckInHelper(ZJULogin):
                 'szsqsfybl':'0',
                 'gwszgz':'',
                 'campus': '紫金港校区', # 紫金港校区 玉泉校区 西溪校区 华家池校区 之江校区 海宁校区 舟山校区 宁波校区 工程师学院 杭州国际科创中心 其他
-                # 👇-----2022.5.7日修改-----👇
-                'verifyCode': code,
-                # 👆-----2022.5.7日修改-----👆
+                # 👇-----2022.5.19日修改-----👇
+                'verifyCode': ''  ,
+                # 👆-----2022.5.19日修改-----👆
             }
             data.update(verify_code)
             response = self.sess.post('https://healthreport.zju.edu.cn/ncov/wap/default/save', data=data,
@@ -320,11 +320,11 @@ class HealthCheckInHelper(ZJULogin):
     def Push(self,res):
         if res:
             if self.CHAT_ID and self.TG_TOKEN :
-                post_tg('浙江大学每日健康打卡 V3.0 '+ f" \n\n 签到结果:{res}", self.CHAT_ID, self.TG_TOKEN) 
+                post_tg('浙江大学每日健康打卡 V3.1 '+ f" \n\n 签到结果:{res}", self.CHAT_ID, self.TG_TOKEN) 
             else:
                 print("telegram推送未配置,请自行查看签到结果")
             if self.DD_BOT_TOKEN:
-                ding= dingpush('浙江大学每日健康打卡 V3.0 ', res,self.reminders,self.DD_BOT_TOKEN,self.DD_BOT_SECRET)
+                ding= dingpush('浙江大学每日健康打卡 V3.1 ', res,self.reminders,self.DD_BOT_TOKEN,self.DD_BOT_SECRET)
                 ding.SelectAndPush()
             else:
                 print("钉钉推送未配置，请自行查看签到结果")
