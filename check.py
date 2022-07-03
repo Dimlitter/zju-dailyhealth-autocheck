@@ -7,7 +7,6 @@ import os
 import random
 from notify.tgpush import post_tg
 from notify.Dingpush import dingpush
-from utils import verify
 
 #签到程序模块
 class LoginError(Exception):
@@ -293,7 +292,7 @@ class HealthCheckInHelper(ZJULogin):
                 'gtjzzfjsj': '',
                 'gwszdd': '',
                 'szgjcs': '',
-                'ismoved': '0', # 位置变化为1，不变为0
+                'ismoved': '5',
                 'zgfx14rfhsj':'',
                 'jrdqjcqk': '',
                 'jcwhryfs': '',	
@@ -307,10 +306,11 @@ class HealthCheckInHelper(ZJULogin):
                 'jhfjsftjhb':'0',
                 'szsqsfybl':'0',
                 'gwszgz':'',
-                'campus': '紫金港校区', # 紫金港校区 玉泉校区 西溪校区 华家池校区 之江校区 海宁校区 舟山校区 宁波校区 工程师学院 杭州国际科创中心 其他
+                'campus': '', # 紫金港校区 玉泉校区 西溪校区 华家池校区 之江校区 海宁校区 舟山校区 宁波校区 工程师学院 杭州国际科创中心 其他 /不在校即为空值
                 # 👇-----2022.5.19日修改-----👇
                 'verifyCode': ''  ,
                 # 👆-----2022.5.19日修改-----👆
+                'internship': '1'
             }
             data.update(verify_code)
             response = self.sess.post('https://healthreport.zju.edu.cn/ncov/wap/default/save', data=data,
