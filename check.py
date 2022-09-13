@@ -272,7 +272,7 @@ class HealthCheckInHelper(ZJULogin):
                 'jrsfqzfy': '',
                 'sfyqjzgc': '0',
                 # 是否申领杭州健康码
-                'sfsqhzjkk': '0,
+                'sfsqhzjkk': '0',
                 # 杭州健康吗颜色，1:绿色 2:红色 3:黄色
                 'sqhzjkkys': '1',
                 'gwszgzcs': '',
